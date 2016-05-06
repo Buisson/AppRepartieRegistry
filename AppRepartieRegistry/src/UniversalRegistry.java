@@ -11,22 +11,23 @@ import java.util.Hashtable;
  */
 public class UniversalRegistry extends UnicastRemoteObject implements IUniversalRegistry{
 
-    private Hashtable<String,Serializable> universalRegistry;
+    private Hashtable<String,Object> universalRegistry;
 
     public UniversalRegistry() throws RemoteException {
         super();
-        universalRegistry = new Hashtable<String,Serializable>();
+        universalRegistry = new Hashtable<String,Object>();
     }
 
     @Override
-    public void bind(String key,Serializable o){
-        System.out.println("BIIIINNNDDIIIIINNG!");
-        universalRegistry.put(key,o);
+    public void bind(String key,Object o){
+        System.out.println(o.getClass().getName());
+        universalRegistry.put(key, o);
     }
 
     @Override
-    public Serializable lookup(String key){
-        System.out.println("LOOOKKKKUPPPP!");
+    public Object lookup(String key){
         return universalRegistry.get(key);
     }
+
+
 }

@@ -1,0 +1,9 @@
+## Projet Server
+pas d'options
+## Projet classserver
+vm  = pas d'options
+main : 2002 + classpath du projet Server
+## Projet AppRepartieRegistry
+-Djava.security.policy= chemin vers java.policy
+-Djava.rmi.server.useCodebaseOnly=false
+-Djava.rmi.server.codebase=http://nom de machine:2002/

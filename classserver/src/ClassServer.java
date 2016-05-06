@@ -108,6 +108,7 @@ public abstract class ClassServer implements Runnable {
           return;
         }
       } catch (Exception e) {
+        e.printStackTrace();
         // write out error response
         System.out.println("!!! ClassServer failed to load class " + path + ".");
         out.writeBytes("HTTP/1.0 400 " + e.getMessage() + "\r\n");
@@ -169,12 +170,14 @@ public abstract class ClassServer implements Runnable {
     do {
       line = in.readLine();
       if (line.startsWith("GET /")) {
+        System.out.println(line);
         path = getPath(line);
       } else {
         // eat line
       }
     } while ((line.length() != 0) && (line.charAt(0) != '\r') && (line.charAt(0) != '\n'));
     if (path != null) {
+
       return path;
     } else {
       throw new java.io.IOException("Malformed Header");
@@ -190,7 +193,7 @@ public abstract class ClassServer implements Runnable {
   private static String getPath(String line) {
     // extract class from GET line
     line = line.substring(5, line.length() - 1).trim();
-    int index = line.indexOf(".class ");
+    int index = line.indexOf(".class");
     if (index != -1) {
       return line.substring(0, index).replace('/', '.');
     } else {

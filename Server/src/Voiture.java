@@ -7,7 +7,8 @@ public class Voiture implements Serializable{
 
     int nbRoues;
 
-    public Voiture(int nbRoues){
-        this.nbRoues=nbRoues;
-    }
+    public Voiture(int nbRoues){this.nbRoues=nbRoues;}
+    public Voiture() {}
+    public int getNbRoues() {return nbRoues;}
+    public void setNbRoues(int nbRoues) {this.nbRoues = nbRoues;}
 }
