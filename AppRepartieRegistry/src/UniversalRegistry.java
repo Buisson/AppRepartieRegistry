@@ -26,6 +26,7 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
 
     @Override
     public Object lookup(String key){
+        System.out.println("searching for : "+universalRegistry.get(key));
         return universalRegistry.get(key);
     }
 

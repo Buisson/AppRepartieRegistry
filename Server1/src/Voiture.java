@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * Created by colombet on 04/05/16.
  */
-public class Voiture implements Serializable{
+public class Voiture implements Serializable ,IVoiture{
 
     int nbRoues;
 

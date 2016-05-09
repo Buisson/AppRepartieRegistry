@@ -12,9 +12,9 @@ public class Main {
         try {
             Remote r = Naming.lookup("UniversalRegistry");
             IUniversalRegistry iur = (IUniversalRegistry)r;
-            Voiture v = new Voiture(3);
-            iur.bind("hahaha",v);
-            System.out.println(((Voiture)iur.lookup("hahaha")).getNbRoues());
+            Voiture v = new Voiture(42);
+            iur.bind("uneVoiture",v);
+            System.out.println(((Voiture)iur.lookup("uneVoiture")).getNbRoues());
 
 
 
