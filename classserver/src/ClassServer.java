@@ -170,7 +170,6 @@ public abstract class ClassServer implements Runnable {
     do {
       line = in.readLine();
       if (line.startsWith("GET /")) {
-        System.out.println(line);
         path = getPath(line);
       } else {
         // eat line

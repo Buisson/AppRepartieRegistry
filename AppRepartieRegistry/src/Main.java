@@ -23,7 +23,6 @@ public class Main {
             UniversalRegistry ur = new UniversalRegistry();
             //registry.rebind("UniversalRegistry",ur);
             Naming.rebind("UniversalRegistry", ur);
-            System.out.println("DONE!");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {

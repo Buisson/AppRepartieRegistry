@@ -1,20 +1,20 @@
 import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+import java.rmi.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
 
-
+        if (System.getSecurityManager() == null)
+            System.setSecurityManager(new RMISecurityManager());
         try {
             Remote r = Naming.lookup("UniversalRegistry");
             IUniversalRegistry iur = (IUniversalRegistry)r;
-            IVoiture voiture = (IVoiture) iur.lookup("uneVoiture");
-            System.out.println(voiture.getNbRoues());
+
+            //iur.getLast(2);
+            System.out.println(iur.lookup("ve"));
+            //System.out.println(((IVoiture) iur.getLast(5).get(0)).getNbRoues());
 
 
         } catch (NotBoundException e) {

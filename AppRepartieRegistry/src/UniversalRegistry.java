@@ -1,10 +1,12 @@
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Hashtable;
+import java.util.*;
 
 /**
  * Created by colombet on 04/05/16.
@@ -12,23 +14,59 @@ import java.util.Hashtable;
 public class UniversalRegistry extends UnicastRemoteObject implements IUniversalRegistry{
 
     private Hashtable<String,Object> universalRegistry;
+    private Set< Enregistrement> history;
+    private int Time = 0;
 
     public UniversalRegistry() throws RemoteException {
         super();
-        universalRegistry = new Hashtable<String,Object>();
+        universalRegistry = new Hashtable<>();
+        history = new TreeSet<>();
     }
 
     @Override
-    public void bind(String key,Object o){
-        System.out.println(o.getClass().getName());
+    public void bind(String key,Object o)  {
+        if(universalRegistry.containsKey(key))
+            System.out.println("hahaha");
+            //throw  new AlreadyExistingElement();
         universalRegistry.put(key, o);
+        history.add(new Enregistrement(Time,key));
+        Time++;
     }
 
     @Override
     public Object lookup(String key){
         System.out.println("searching for : "+universalRegistry.get(key));
+        System.out.println("parent : " +universalRegistry.get(key).getClass().getSuperclass());
         return universalRegistry.get(key);
     }
 
+    @Override
+    public List<Object> getLast(int x) throws RemoteException {
+        if(x > universalRegistry.size())
+            x = universalRegistry.size();
+        List<Object> lasts = new ArrayList<>();
+        for(Enregistrement e : history){
+            System.out.println(e.getDate());
+            if(e.getDate() >= x)
+                lasts.add(universalRegistry.get(e.getKey()));
+        }
+
+        return lasts;
+    }
+
+    @Override
+    public List<String> lastKeys(int x) throws RemoteException {
+        if(x > universalRegistry.size())
+            x = universalRegistry.size();
+        List<String> lasts = new ArrayList<>();
+
+        for(Enregistrement e : history){
+            System.out.println(e.getDate());
+            if(e.getDate() >= x)
+                lasts.add(e.getKey());
+        }
+
+        return lasts;
+    }
 
 }
