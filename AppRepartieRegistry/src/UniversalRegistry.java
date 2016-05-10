@@ -14,7 +14,7 @@ import java.util.*;
 public class UniversalRegistry extends UnicastRemoteObject implements IUniversalRegistry{
 
     private Hashtable<String,Object> universalRegistry;
-    private Set< Enregistrement> history;
+    private Set<Enregistrement> history;
     private int Time = 0;
 
     public UniversalRegistry() throws RemoteException {
@@ -35,8 +35,11 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
 
     @Override
     public Object lookup(String key){
-        System.out.println("searching for : "+universalRegistry.get(key));
-        System.out.println("parent : " +universalRegistry.get(key).getClass().getSuperclass());
+        // TODO : deal with non existent keys
+        for(Enregistrement e : history){
+            if(e.getKey().equals(key))
+                e.increment();
+        }
         return universalRegistry.get(key);
     }
 
@@ -46,11 +49,9 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
             x = universalRegistry.size();
         List<Object> lasts = new ArrayList<>();
         for(Enregistrement e : history){
-            System.out.println(e.getDate());
             if(e.getDate() >= x)
                 lasts.add(universalRegistry.get(e.getKey()));
         }
-
         return lasts;
     }
 
@@ -67,6 +68,28 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
         }
 
         return lasts;
+    }
+
+    @Override
+    public List<String> popularKeys(int x) throws RemoteException {
+        int max = 0;
+        List<String> popular = new ArrayList<>();
+        for (Enregistrement e : history) {
+            if (e.getDemands() == max) {
+                popular.add(e.getKey());
+            }
+            if (e.getDemands() > max) {
+                max = e.getDemands();
+                popular.clear();
+                popular.add(e.getKey());
+            }
+        }
+        return popular;
+    }
+
+    @Override
+    public List<Object> getCarByType(String type)throws RemoteException {
+        return  ServiceVoiture.getCarByType(type,universalRegistry);
     }
 
 }

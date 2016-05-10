@@ -1,4 +1,3 @@
-import org.joda.time.DateTime;
 
 /**
  * Created by user on 09/05/16.
@@ -6,19 +5,20 @@ import org.joda.time.DateTime;
 public class Enregistrement implements Comparable {
     private int  date ;
     private String key;
+    private int demands;
 
     public Enregistrement(int date, String key) {
         this.date = date;
         this.key = key;
+        this.demands=0;
     }
 
+    public int getDemands() {
+        return demands;
+    }
     public int getDate() {return date;}
-
-    public void setDate(int date) {this.date = date;}
-
     public String getKey() {return key;}
-
-    public void setKey(String key) {this.key = key;}
+    public void increment(){this.demands++;}
 
 
 
