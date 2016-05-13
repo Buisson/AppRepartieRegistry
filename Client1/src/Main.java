@@ -13,7 +13,11 @@ public class Main {
             Remote r = Naming.lookup("UniversalRegistry");
             IUniversalRegistry iur = (IUniversalRegistry)r;
 
-            //iur.lookup("ve");iur.lookup("ve");iur.lookup("ve");
+            iur.lookup("ve");
+
+
+
+            iur.lookup("ve");iur.lookup("ve");
             //iur.lookup("v2");iur.lookup("v2");iur.lookup("v2");
             //iur.lookup("v3");
             //System.out.println(iur.popularKeys(0).size());
