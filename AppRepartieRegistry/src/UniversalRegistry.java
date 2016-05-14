@@ -1,5 +1,3 @@
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -17,10 +15,14 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
     private Set<Enregistrement> history;
     private int Time = 0;
 
+    private ServiceQueue sq;
+
     public UniversalRegistry() throws RemoteException {
         super();
         universalRegistry = new Hashtable<>();
         history = new TreeSet<>();
+
+        sq=new ServiceQueue();
     }
 
     @Override
@@ -90,6 +92,12 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
     @Override
     public List<Object> getCarByType(String type)throws RemoteException {
         return  ServiceVoiture.getCarByType(type,universalRegistry);
+    }
+
+    @Override
+    public javax.jms.Queue getQueueServiceQueue()throws RemoteException {
+        sq.createQueue();
+        return sq.subscribeQueue();
     }
 
 }
