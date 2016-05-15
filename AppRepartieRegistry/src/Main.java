@@ -18,10 +18,8 @@ public class Main {
             System.setSecurityManager(new RMISecurityManager());
 
         try {
-            //Registry registry = LocateRegistry.getRegistry();
             LocateRegistry.createRegistry(1099);
             UniversalRegistry ur = new UniversalRegistry();
-            //registry.rebind("UniversalRegistry",ur);
             Naming.rebind("UniversalRegistry", ur);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -29,7 +27,5 @@ public class Main {
             e.printStackTrace();
         }
         while(true);
-
-
     }
 }
