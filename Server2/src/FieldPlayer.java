@@ -1,7 +1,7 @@
 /**
  * Created by user on 15/05/16.
  */
-public class FieldPlayer extends Player {
+public class FieldPlayer extends Player implements IFieldPlayer {
     private  int scoredGoals;
     public FieldPlayer(int age) {
         super(age);
@@ -16,11 +16,9 @@ public class FieldPlayer extends Player {
     public void score(int goals){
         this.scoredGoals=goals;
     }
-
     public int getScoredGoals() {
         return scoredGoals;
     }
-
     public void setScoredGoals(int scoredGoals) {
         this.scoredGoals = scoredGoals;
     }

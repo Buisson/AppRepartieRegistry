@@ -14,13 +14,24 @@ public class StatsService  extends UnicastRemoteObject implements  IStatsService
     }
 
     @Override
-    public List<Player> bestGoalKeepers()  {
-        return null;
+    public List<IGoalkeeper> bestGoalKeepers()  {
+        List<IGoalkeeper> players = new ArrayList<>();
+        int min = goalKeepers.get(0).getConcededGoals();
+        for( Goalkeeper goalkeeper: goalKeepers){
+            if(goalkeeper.getConcededGoals() > min){
+                players.clear();
+                players.add(goalkeeper);
+                min = goalkeeper.getConcededGoals();
+            }else if(goalkeeper.getConcededGoals()== min){
+                min = goalkeeper.getConcededGoals();
+                players.add(goalkeeper);
+            }
+        }
+        return players;
     }
     @Override
-    public List<Player> goalScorers()  {
-        System.out.println("here");
-        List<Player> players = new ArrayList<>();
+    public List<IFieldPlayer> goalScorers()  {
+        List<IFieldPlayer> players = new ArrayList<>();
         int max = goalScorers.get(0).getScoredGoals();
         for( FieldPlayer fieldplayer : goalScorers){
             if(fieldplayer.getScoredGoals() > max){

@@ -25,13 +25,19 @@ public class Main {
         statsService.getGoalScorers().add(player5);
 
 
+        Goalkeeper goalkeeper = new Goalkeeper(20);
+        goalkeeper.concede(20);
+        Goalkeeper goalkeeper1 = new Goalkeeper(20);
+        goalkeeper.concede(10);
+        Goalkeeper goalkeeper2 = new Goalkeeper(20);
+        goalkeeper.concede(7);
 
+        statsService.getGoalKeepers().add(goalkeeper);
+        statsService.getGoalKeepers().add(goalkeeper1);
+        statsService.getGoalKeepers().add(goalkeeper2);
     }
     public static void main(String[] args) {
-
-
         try {
-
             Registry registry = LocateRegistry.createRegistry(1098);
             StatsService statsService = new StatsService();
             populate(statsService);
