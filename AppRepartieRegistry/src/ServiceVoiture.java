@@ -12,8 +12,7 @@ public class ServiceVoiture {
         List<Object> cars = new ArrayList<>();
         for (Map.Entry<String, Object> entry : universalRegistry.entrySet()) {
             System.out.println(entry.getValue().getClass().getName());
-            if(entry.getValue().getClass().it
-            getName().equals(type)){
+            if(entry.getValue().getClass().getName().equals(type)){
                 System.out.println("heheheheh");
                 cars.add(entry.getValue());
             }
