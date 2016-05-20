@@ -37,7 +37,7 @@ public class Main implements javax.jms.MessageListener{
             Remote r = Naming.lookup("UniversalRegistry");
             IUniversalRegistry iur = (IUniversalRegistry)r;
             tmpQueue = iur.getQueueServiceQueue();
-
+            //iur.lookup("fail");
         }catch(Exception e){
             e.printStackTrace();
         }

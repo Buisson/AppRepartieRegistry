@@ -27,20 +27,27 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
 
     @Override
     public void bind(String key,Object o)  {
-        if(universalRegistry.containsKey(key))
-            System.out.println("hahaha");
-            //throw  new AlreadyExistingElement();
+        if(universalRegistry.containsKey(key)){
+            throw new AlreadyExistingElement();
+        }
+
         universalRegistry.put(key, o);
         history.add(new Enregistrement(Time,key));
         Time++;
     }
 
     @Override
-    public Object lookup(String key){
+    public Object lookup(String key) {
         // TODO : deal with non existent keys
         for(Enregistrement e : history){
             if(e.getKey().equals(key))
                 e.increment();
+        }
+        if(universalRegistry.isEmpty()){
+            throw new NoExistingElement();
+        }
+        if(universalRegistry.get(key) == null){
+            throw new NoExistingElement();
         }
         return universalRegistry.get(key);
     }
