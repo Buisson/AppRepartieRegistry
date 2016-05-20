@@ -23,19 +23,15 @@ public class Main {
 
 
             //On récupère le nombre de roues de l'objet voiture v1.
+            // ça doit afficher 5
             System.out.println("Nombres de roues de v1: "+((IVoiture)iur.lookup("v1")).getNbRoues());
 
+            // le nombre de classes enregister qui sont de type Voiture ou héritent de voiture
+            System.out.println(iur.deepSearch("Voiture").size());
 
-
-            //On récupere un Objet selon nom de la classe Voiture.
-            for (Object v : iur.getCarByType("Voiture")){
-                System.out.println("Nombres de roues de la voiture : "+((IVoiture) v).getNbRoues());
-            }
-
-            //On récupere un Objet selon nom de la classe VoitureElectrique.
-            for (Object v : iur.getCarByType("VoitureElectrique")){
-                System.out.println("Durabilite de Voiture electrique : "+((IVoitureElectrique) v).getDurabilite());
-            }
+            // on récupere un goalkeeper pour tester l'échange de fichiers entre les projets
+            IGoalkeeper goalkeeper =(IGoalkeeper ) iur.lookup("exchange");
+            System.out.println(goalkeeper.getConcededGoals());
 
         } catch (NotBoundException e) {
             e.printStackTrace();

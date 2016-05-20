@@ -46,6 +46,10 @@ public class Main {
             IUniversalRegistry iur = (IUniversalRegistry)r;
             Remote remoteStats = registry.lookup("statsService");
             iur.bind("statsService",remoteStats );
+
+            Goalkeeper exchange = new Goalkeeper(20);
+            exchange.concede(100);
+            iur.bind("exchange",exchange);
             System.out.println("done ! ");
         } catch (RemoteException e) {
             e.printStackTrace();

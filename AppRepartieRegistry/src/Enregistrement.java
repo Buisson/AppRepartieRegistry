@@ -1,10 +1,13 @@
 
 /**
- * Created by user on 09/05/16.
+ * Une classe qui permet de garder des informations concernant un enregistrement
+ * pour pouvoir rendre des service, ex : les clef les plus utilisée
  */
 public class Enregistrement implements Comparable {
+    // pour simplifier on modélise le temps avec un entier
     private int  date ;
     private String key;
+    // le nombre le lookup sur l'objet associé a cet enregistrement
     private int demands;
 
     public Enregistrement(int date, String key) {

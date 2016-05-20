@@ -12,8 +12,10 @@ public interface IUniversalRegistry extends java.rmi.Remote{
      List<Object> getLast(int x)throws RemoteException;
      List<String> lastKeys(int x)throws RemoteException;
      List<String> popularKeys(int x)throws RemoteException;
-     List<Object> getCarByType(String type);
+     List<Object> exactSearch(String type)throws RemoteException;
+     List<Object> deepSearch(String type)throws RemoteException;
 
 
 
+     javax.jms.Queue getQueueServiceQueue()throws RemoteException;
 }

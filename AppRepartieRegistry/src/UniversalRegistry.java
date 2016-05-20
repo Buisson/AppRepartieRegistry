@@ -90,8 +90,29 @@ public class UniversalRegistry extends UnicastRemoteObject implements IUniversal
     }
 
     @Override
-    public List<Object> getCarByType(String type)throws RemoteException {
-        return  ServiceVoiture.getCarByType(type,universalRegistry);
+    public List<Object> exactSearch(String type)throws RemoteException {
+        List<Object> objects = new ArrayList<>();
+        for (Map.Entry<String, Object> entry : universalRegistry.entrySet()) {
+            if(entry.getValue().getClass().getName().equals(type)){
+                objects.add(entry.getValue());
+            }
+        }
+        return objects;
+
+    }
+
+    @Override
+    public List<Object> deepSearch(String type) throws RemoteException {
+        List<Object> objects = new ArrayList<>();
+        for (Map.Entry<String, Object> entry : universalRegistry.entrySet()) {
+            boolean father = entry.getValue().getClass().getName().equals(type);
+            boolean son  = entry.getValue().getClass().getSuperclass().getName().equals(type);
+            if(father || son){
+                objects.add(entry.getValue());
+            }
+        }
+        return objects;
+
     }
 
     @Override
